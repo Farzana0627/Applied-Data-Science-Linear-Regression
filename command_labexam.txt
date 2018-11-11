@@ -1,0 +1,109 @@
+//a
+>fix(Auto)
+
+>pair(Auto)
+//b
+>cor(subset(Auto, Select=-name))
+
+//cr square 80% 
+details in picture
+
+> lm.fitallexceptname=lm(mpg~cylinders+displacement+horsepower+weight+acceleration+year, data=Auto)
+> summary(lm.fitallexceptname)
+
+//d
+> plot(lm.fitallexceptname)
+
+
+> plot(predict(lm.fitallexceptname), rstudent(lm.fitallexceptname))
+> plot(predict(lm.fitallexceptname), residuals(lm.fitallexceptname))
+
+> library(car)
+> vif(lm.fitallexceptname)
+
+> lm.fityear=lm(mpg~year)
+> lm.fitweight=lm(mpg~weight)
+
+//e
+> lm.fitYWinto=lm(mpg~weight*year)
+> summary(lm.fitYWinto)
+> summary(lm.fityear)
+> summary(lm.fitweight)
+
+//f
+> plot(mpg~year)
+> plot(mpg~weight)
+> lm.fitweightsquare=lm(mpg~weight+I(weight^2))
+> summary(lm.fitweightsquare)
+
+> lm.fitweightlog=lm(mpg~weight+log(weight))
+> summary(lm.fitweightlog)
+
+> lm.fitweightroot=lm(mpg~weight+I(weight^.5))
+> summary(lm.fitweightroot)
+
+
+14.
+//ans of a
+> set.seed (1)
+> x1= runif (100)
+> x2 =0.5* x1+rnorm (100) /10
+> y=2+2* x1 +0.3* x2+rnorm (100)
+
+
+//(ans of b)
+> lm.fitxy=lm(y~x1+x2)
+> cor(x1, x2)
+[1] 0.8351212 
+> plot(x1, x2)
+
+//c)
+beta 1 null hypo rejected, beta 2 null hypo not rejected
+
+//d -> null hypo rejected
+F value high, p very small, 2.66*e^-6
+
+
+
+// e
+> lm.x2y=lm(y~x2)
+> summary(lm.x2y)
+
+//f
+yes, x1 more significant than x2, determining y
+
+//g
+> x1=c(x1 , 0.1)
+> x2=c(x2 , 0.8)
+> y=c(y ,6)
+
+>lm.fit1 = lm(y~x1+x2)
+>summary(lm.fit1)
+
+>lm.fit2 = lm(y~x1)
+>summary(lm.fit1)
+
+
+>lm.fit3 = lm(y~x2)
+>summary(lm.fit2)
+
+>par(mfrow=c(2,2))
+>plot(lm.fit1)
+
+> par(mfrow=c(2,2))
+> plot(lm.fit2)
+
+> par(mfrow=c(2,2))
+> plot(lm.fit3)
+
+
+> plot(predict(lm.fit1), residuals(lm.fit1))
+> plot(predict(lm.fit2), residuals(lm.fit2))
+> plot(predict(lm.fit3), residuals(lm.fit3))
+
+
+> cor(x1,x2)
+[1] 0.7392279
+
+outliers very low, 21,82,55
+High levrg point 101

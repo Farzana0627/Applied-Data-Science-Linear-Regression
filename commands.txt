@@ -1,0 +1,69 @@
+>	
+>library(MASS)
+
+
+
+// load csv file from directory
+
+> mydata <- read.csv("C:/Users/Tasnim Fabiha/Documents/R/win-library/3.4/ISLR/data/Advertising.csv", header=TRUE,sep=",")
+> fix(mydata)
+
+//simple linear regression
+> lm.fit=lm(Sales~TV, data=mydata)
+> attach(mydata)
+> lm.fit=lm(Sales~TV)
+> lm.fit
+> summary(lm.fit)
+
+// multiple linear regression && F stistic calculation
+> lm.fit=lm(Sales~Newspaper+TV+Radio,data=mydata)
+
+or load lm for all predictors > lm.fit(Sales~.)
+
+> attach(mydata)
+> summary(lm.fit)
+
+//confidence interval
+> confint(lm.fit)
+
+//VIF calculation
+> install.packages("car", repos="http://cran.us.r-project.org")
+> library(car)
+> vif(lm.fit)
+
+
+
+// prediction interval for new values
+> predict(lm.fit1, data.frame(TV= c(5,10,15)), interval = "prediction")
+
+// prediction for all training data
+> predict(lm.fit1, data.frame(TV= c()), interval = "prediction")
+
+
+//residuals graph
+> plot(predict(lm.fit), residuals(lm.fit))
+> abline(lm.fit)
+
+// for different types of graph
+> lm.TV=lm(Sales~TV)
+>plot(lm.TV)
+
+
+// Calculate R^2
+> summary(lm.TV)$r.sq
+
+
+// Calculate RSE
+> summary(lm.TV)$r.sigma
+
+
+
+//Compute the matrix of correlations between the variables using
+the function cor(). You will need to exclude the name variable,
+cor()
+which is qualitative.
+>cor(subset(Auto, Select=-name))
+
+
+
+http://blog.princehonest.com/stat-learning/ch3/applied.html
